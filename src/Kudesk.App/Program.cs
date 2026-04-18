@@ -15,16 +15,22 @@ class Program
         }
         catch
         {
-            var mgr = new UpdateManager("https://github.com/YOUR_USERNAME/Kudesk/releases");
-            if (mgr.IsInstalled)
+            try
             {
-                var update = mgr.CheckForUpdatesAsync().GetAwaiter().GetResult();
-                if (update != null)
+                var mgr = new UpdateManager("https://github.com/YOUR_USERNAME/Kudesk/releases");
+                if (mgr.IsInstalled)
                 {
-                    mgr.DownloadUpdatesAsync(update).GetAwaiter().GetResult();
-                    mgr.ApplyUpdatesAndRestart();
-                    return;
+                    var update = mgr.CheckForUpdatesAsync().GetAwaiter().GetResult();
+                    if (update != null)
+                    {
+                        mgr.DownloadUpdatesAsync(update).GetAwaiter().GetResult();
+                        mgr.ApplyUpdatesAndRestart(update);
+                        return;
+                    }
                 }
+            }
+            catch
+            {
             }
         }
 
