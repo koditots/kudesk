@@ -11,7 +11,7 @@ A production-ready desktop POS (Point of Sale) application built with Avalonia, 
 
 ## Installation
 
-Download installers from the [Releases](https://github.com/YOUR_USERNAME/Kudesk/releases) page:
+Download installers from the [Releases](https://github.com/koditots/kudesk/releases) page:
 
 - **Windows**: `Kudesk-win-Setup.exe`
 - **macOS**: `Kudesk-win-Setup.exe` (run via Wine/CrossOver or build on macOS)

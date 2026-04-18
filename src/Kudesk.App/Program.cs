@@ -17,7 +17,7 @@ class Program
         {
             try
             {
-                var mgr = new UpdateManager("https://github.com/YOUR_USERNAME/Kudesk/releases");
+                var mgr = new UpdateManager("https://github.com/koditots/kudesk/releases");
                 if (mgr.IsInstalled)
                 {
                     var update = mgr.CheckForUpdatesAsync().GetAwaiter().GetResult();
