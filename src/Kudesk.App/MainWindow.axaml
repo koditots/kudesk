@@ -2,8 +2,230 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="600"
         x:Class="Kudesk.App.MainWindow"
-        Title="Kudesk.App">
-    Welcome to Avalonia!
+        Title="Kudesk ERP">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="E_xit"/>
+            </MenuItem>
+            <MenuItem Header="_View">
+                <MenuItem Header="_Super Admin"/>
+                <MenuItem Header="_Admin"/>
+                <MenuItem Header="_POS"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_About"/>
+            </MenuItem>
+        </Menu>
+
+        <Grid ColumnDefinitions="200,*,200">
+            <Border Grid.Column="0" Background="#2D2D30" Padding="10">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Kudesk ERP" FontSize="18" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                    
+                    <Button Content="Super Admin" HorizontalAlignment="Stretch" Height="40"/>
+                    <Button Content="Admin Panel" HorizontalAlignment="Stretch" Height="40"/>
+                    <Button Content="POS / Sales" HorizontalAlignment="Stretch" Height="40"/>
+                    <Button Content="Inventory" HorizontalAlignment="Stretch" Height="40"/>
+                    <Button Content="Purchases" HorizontalAlignment="Stretch" Height="40"/>
+                    <Button Content="Reports" HorizontalAlignment="Stretch" Height="40"/>
+                    <Button Content="Settings" HorizontalAlignment="Stretch" Height="40"/>
+                </StackPanel>
+            </Border>
+
+            <TabControl Grid.Column="1" Margin="10">
+                <TabItem Header="Super Admin">
+                    <StackPanel Margin="20" Spacing="20">
+                        <TextBlock Text="Super Admin Dashboard" FontSize="24" FontWeight="Bold"/>
+                        
+                        <WrapPanel>
+                            <Border Background="#3C3C3E" CornerRadius="5" Padding="20" Margin="0,0,15,15">
+                                <StackPanel>
+                                    <TextBlock Text="Total Tenants" Foreground="#aaaaaa"/>
+                                    <TextBlock Text="12" FontSize="32" FontWeight="Bold" Foreground="#569CD6"/>
+                                </StackPanel>
+                            </Border>
+                            
+                            <Border Background="#3C3C3E" CornerRadius="5" Padding="20" Margin="0,0,15,15">
+                                <StackPanel>
+                                    <TextBlock Text="Active Users" Foreground="#aaaaaa"/>
+                                    <TextBlock Text="48" FontSize="32" FontWeight="Bold" Foreground="#4EC9B0"/>
+                                </StackPanel>
+                            </Border>
+                            
+                            <Border Background="#3C3C3E" CornerRadius="5" Padding="20" Margin="0,0,15,15">
+                                <StackPanel>
+                                    <TextBlock Text="Revenue (MTD)" Foreground="#aaaaaa"/>
+                                    <TextBlock Text="$2,450" FontSize="32" FontWeight="Bold" Foreground="#DCDCAA"/>
+                                </StackPanel>
+                            </Border>
+                            
+                            <Border Background="#3C3C3E" CornerRadius="5" Padding="20" Margin="0,0,15,15">
+                                <StackPanel>
+                                    <TextBlock Text="Open Tickets" Foreground="#aaaaaa"/>
+                                    <TextBlock Text="5" FontSize="32" FontWeight="Bold" Foreground="#F44747"/>
+                                </StackPanel>
+                            </Border>
+                        </WrapPanel>
+                        
+                        <TextBlock Text="Recent Tenants" FontSize="18" FontWeight="Bold" Margin="0,20,0,10"/>
+                    </StackPanel>
+                </TabItem>
+                
+                <TabItem Header="Admin">
+                    <StackPanel Margin="20" Spacing="20">
+                        <TextBlock Text="Admin Dashboard" FontSize="24" FontWeight="Bold"/>
+                        
+                        <WrapPanel>
+                            <Border Background="#3C3C3E" CornerRadius="5" Padding="20" Margin="0,0,15,15">
+                                <StackPanel>
+                                    <TextBlock Text="Today's Sales" Foreground="#aaaaaa"/>
+                                    <TextBlock Text="$1,234" FontSize="32" FontWeight="Bold" Foreground="#4EC9B0"/>
+                                </StackPanel>
+                            </Border>
+                            
+                            <Border Background="#3C3C3E" CornerRadius="5" Padding="20" Margin="0,0,15,15">
+                                <StackPanel>
+                                    <TextBlock Text="Products" Foreground="#aaaaaa"/>
+                                    <TextBlock Text="156" FontSize="32" FontWeight="Bold" Foreground="#569CD6"/>
+                                </StackPanel>
+                            </Border>
+                            
+                            <Border Background="#3C3C3E" CornerRadius="5" Padding="20" Margin="0,0,15,15">
+                                <StackPanel>
+                                    <TextBlock Text="Customers" Foreground="#aaaaaa"/>
+                                    <TextBlock Text="89" FontSize="32" FontWeight="Bold" Foreground="#DCDCAA"/>
+                                </StackPanel>
+                            </Border>
+                            
+                            <Border Background="#3C3C3E" CornerRadius="5" Padding="20" Margin="0,0,15,15">
+                                <StackPanel>
+                                    <TextBlock Text="Low Stock" Foreground="#aaaaaa"/>
+                                    <TextBlock Text="3" FontSize="32" FontWeight="Bold" Foreground="#F44747"/>
+                                </StackPanel>
+                            </Border>
+                        </WrapPanel>
+                    </StackPanel>
+                </TabItem>
+                
+                <TabItem Header="POS">
+                    <Grid RowDefinitions="2*,*" ColumnDefinitions="2*,*">
+                        <Border Grid.Row="0" Grid.Column="0" Background="#1E1E1E" Margin="5" Padding="15">
+                            <StackPanel Spacing="10">
+                                <TextBlock Text="Products" FontSize="18" FontWeight="Bold" Foreground="White"/>
+                                <TextBox PlaceholderText="Search by name or barcode..." Height="35"/>
+                            </StackPanel>
+                        </Border>
+                        
+                        <Border Grid.Row="0" Grid.Column="1" Background="#252526" Margin="5" Padding="15">
+                            <StackPanel>
+                                <TextBlock Text="Cart (0 items)" FontSize="18" FontWeight="Bold" Foreground="White"/>
+                                <TextBlock Text="Cart is empty" Foreground="#666" Margin="0,20,0,0"/>
+                            </StackPanel>
+                        </Border>
+                        
+                        <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#1E1E1E" Margin="5" Padding="15">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <StackPanel>
+                                    <TextBlock Text="Total" Foreground="White" FontSize="24"/>
+                                    <TextBlock Text="$0.00" Foreground="#4EC9B0" FontSize="36" FontWeight="Bold"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Spacing="10">
+                                    <Button Content="Clear Cart" Width="120" Height="35"/>
+                                    <Button Content="Checkout - $0.00" Width="150" Height="40"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </TabItem>
+                
+                <TabItem Header="Inventory">
+                    <StackPanel Margin="20" Spacing="20">
+                        <TextBlock Text="Inventory Management" FontSize="24" FontWeight="Bold"/>
+                        
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <Button Content="+ Add Product"/>
+                            <Button Content="+ Add Category"/>
+                            <Button Content="+ Add Brand"/>
+                            <Button Content="+ Add Warehouse"/>
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+                
+                <TabItem Header="Purchases">
+                    <StackPanel Margin="20">
+                        <TextBlock Text="Purchase Management" FontSize="24" FontWeight="Bold"/>
+                    </StackPanel>
+                </TabItem>
+                
+                <TabItem Header="Reports">
+                    <StackPanel Margin="20" Spacing="20">
+                        <TextBlock Text="Reports" FontSize="24" FontWeight="Bold"/>
+                        
+                        <WrapPanel>
+                            <Button Content="Sales Report" Width="150" Height="60" Margin="5"/>
+                            <Button Content="Purchase Report" Width="150" Height="60" Margin="5"/>
+                            <Button Content="Stock Report" Width="150" Height="60" Margin="5"/>
+                            <Button Content="Profit/Loss" Width="150" Height="60" Margin="5"/>
+                            <Button Content="Top Products" Width="150" Height="60" Margin="5"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </TabItem>
+                
+                <TabItem Header="Settings">
+                    <StackPanel Margin="20" Spacing="20">
+                        <TextBlock Text="Settings" FontSize="24" FontWeight="Bold"/>
+                        
+                        <TextBlock Text="Business Settings" FontSize="18" FontWeight="Bold"/>
+                        <StackPanel Spacing="10">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Business Name" Width="150" VerticalAlignment="Center"/>
+                                <TextBox Width="300"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Email" Width="150" VerticalAlignment="Center"/>
+                                <TextBox Width="300"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+
+            <Border Grid.Column="2" Background="#252526" Padding="15">
+                <StackPanel Spacing="15">
+                    <TextBlock Text="Quick Stats" FontSize="16" FontWeight="Bold" Foreground="White"/>
+                    
+                    <Border Background="#3C3C3E" CornerRadius="5" Padding="15">
+                        <StackPanel>
+                            <TextBlock Text="Today's Sales" Foreground="#aaaaaa" FontSize="12"/>
+                            <TextBlock Text="$1,234.56" FontSize="24" FontWeight="Bold" Foreground="#4EC9B0"/>
+                        </StackPanel>
+                    </Border>
+                    
+                    <Border Background="#3C3C3E" CornerRadius="5" Padding="15">
+                        <StackPanel>
+                            <TextBlock Text="Products" Foreground="#aaaaaa" FontSize="12"/>
+                            <TextBlock Text="156" FontSize="24" FontWeight="Bold" Foreground="#569CD6"/>
+                        </StackPanel>
+                    </Border>
+                    
+                    <Border Background="#3C3C3E" CornerRadius="5" Padding="15">
+                        <StackPanel>
+                            <TextBlock Text="Customers" Foreground="#aaaaaa" FontSize="12"/>
+                            <TextBlock Text="89" FontSize="24" FontWeight="Bold" Foreground="#DCDCAA"/>
+                        </StackPanel>
+                    </Border>
+                    
+                    <Border Background="#3C3C3E" CornerRadius="5" Padding="15">
+                        <StackPanel>
+                            <TextBlock Text="Low Stock" Foreground="#aaaaaa" FontSize="12"/>
+                            <TextBlock Text="3" FontSize="24" FontWeight="Bold" Foreground="#F44747"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </DockPanel>
 </Window>
