@@ -7,17 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: windows-latest
-            runtime: win-x64
-            suffix: .exe
-          - os: macos-latest
-            runtime: osx-x64
-            suffix: .dmg
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -34,44 +24,39 @@ jobs:
         run: dotnet restore --verbosity minimal
 
       - name: Build
-        run: dotnet publish src/Kudesk.App -c Release -r ${{ matrix.runtime }} --self-contained true -o publish/${{ matrix.runtime }}
+        run: dotnet publish src/Kudesk.App -c Release -r win-x64 --self-contained true -o publish/win
 
       - name: Package with Velopack
         run: |
           dotnet tool install -g vpk
-          vpk pack --packId Kudesk --packVersion ${{ github.ref_name }} --packDir publish/${{ matrix.runtime }} --outputDir releases/${{ matrix.runtime }}
+          $version = ${{ github.ref_name }} -replace '^v', ''
+          vpk pack --packId Kudesk --packVersion $version --packDir publish/win --outputDir releases/win
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: release-${{ matrix.runtime }}
-          path: releases/${{ matrix.runtime }}/*
+          name: release-win
+          path: releases/win/*
 
-  create-release:
+  release:
     needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: write
 
     steps:
-      - name: Download Windows artifacts
+      - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: release-win-x64
+          name: release-win
           path: releases/win
-
-      - name: Download macOS artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: release-osx-x64
-          path: releases/osx
 
       - name: Create GitHub Release
         run: |
+          VERSION=${{ github.ref_name }} -replace '^v',''
           gh release create ${{ github.ref_name }} \
             releases/win/* \
-            releases/osx/* \
-            --title "Kudesk ${{ github.ref_name }}" \
-            --notes "Production release of Kudesk POS"
+            --title "Kudesk v$VERSION" \
+            --notes "New release with interactive UI - clickable navigation, dialogs, cart and checkout system"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
