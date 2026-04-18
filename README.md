@@ -7,15 +7,14 @@ A production-ready desktop POS (Point of Sale) application built with Avalonia, 
 - Offline-first SQLite storage
 - Windows and macOS support
 - Auto-update via Velopack
-- Clean architecture
+- Clean architecture (Core, Infrastructure, App layers)
 
 ## Installation
 
-### Windows
-Download `KudeskSetup.exe` from the [latest release](https://github.com/YOUR_USERNAME/Kudesk/releases) and run the installer.
+Download installers from the [Releases](https://github.com/YOUR_USERNAME/Kudesk/releases) page:
 
-### macOS
-Download `Kudesk.dmg` from the [latest release](https://github.com/YOUR_USERNAME/Kudesk/releases), open it, and drag Kudesk to your Applications folder.
+- **Windows**: `Kudesk-win-Setup.exe`
+- **macOS**: `Kudesk-win-Setup.exe` (run via Wine/CrossOver or build on macOS)
 
 ## Auto-Update
 
@@ -27,12 +26,21 @@ Kudesk automatically checks for updates on startup when connected to the interne
 # Restore dependencies
 dotnet restore
 
-# Build
-dotnet build src/Kudesk.App -c Release
+# Build for Windows
+dotnet publish src/Kudesk.App -c Release -r win-x64 --self-contained true -o publish/win
 
-# Run
-dotnet run --project src/Kudesk.App
+# Build for macOS (on macOS)
+dotnet publish src/Kudesk.App -c Release -r osx-x64 --self-contained true -o publish/osx
+
+# Package with Velopack
+vpk pack -u Kudesk -v 1.0.0 -p publish/win -o releases/win
 ```
+
+## Creating a Release
+
+1. Push a version tag: `git tag v1.0.0 && git push origin v1.0.0`
+2. The GitHub Actions workflow will build and create the release automatically
+3. Or manually upload `releases/win/Kudesk-win-Setup.exe` to the GitHub Release
 
 ## License
 
