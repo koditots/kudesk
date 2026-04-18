@@ -43,6 +43,8 @@ public class Product : BaseEntity
     public bool IsActive { get; set; } = true;
     public string? ImageUrl { get; set; }
 
+    public int? TenantId { get; set; }
+    public Tenant? Tenant { get; set; }
     public int CategoryId { get; set; }
     public ProductCategory? Category { get; set; }
     public int? BrandId { get; set; }

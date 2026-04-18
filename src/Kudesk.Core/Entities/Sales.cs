@@ -11,6 +11,9 @@ public class Customer : BaseEntity
     public bool IsActive { get; set; } = true;
     public decimal? CreditLimit { get; set; }
     public decimal Balance { get; set; }
+    
+    public int? TenantId { get; set; }
+    public Tenant? Tenant { get; set; }
 }
 
 public enum CustomerType
@@ -42,6 +45,8 @@ public class Sale : BaseEntity
     public string? Notes { get; set; }
     public PaymentMethod PaymentMethod { get; set; } = PaymentMethod.Cash;
 
+    public int? TenantId { get; set; }
+    public Tenant? Tenant { get; set; }
     public int? CustomerId { get; set; }
     public Customer? Customer { get; set; }
     public int? CreatedById { get; set; }
